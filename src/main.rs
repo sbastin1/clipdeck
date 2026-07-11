@@ -4,7 +4,7 @@ use gtk::glib;
 use gtk::prelude::*;
 use gtk::{
     Application, ApplicationWindow, Box as GtkBox, Label, ListBox, ListBoxRow, Orientation,
-    SearchEntry,
+    ScrolledWindow, SearchEntry,
 };
 use gtk4_layer_shell::{KeyboardMode, Layer, LayerShell};
 use serde::{Deserialize, Serialize};
@@ -97,6 +97,15 @@ fn build_ui(app: &Application) {
         .vexpand(true)
         .build();
 
+    let scroller = ScrolledWindow::builder()
+        .child(&list)
+        .hscrollbar_policy(gtk::PolicyType::Never)
+        .vscrollbar_policy(gtk::PolicyType::Automatic)
+        .min_content_height(120)
+        .max_content_height(360)
+        .vexpand(true)
+        .build();
+
     populate_list(&list, &history);
 
     let root = GtkBox::builder()
@@ -108,7 +117,7 @@ fn build_ui(app: &Application) {
         .margin_end(12)
         .build();
     root.append(&search);
-    root.append(&list);
+    root.append(&scroller);
 
     let window = ApplicationWindow::builder()
         .application(app)
