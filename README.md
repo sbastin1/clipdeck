@@ -9,6 +9,9 @@ It has two parts:
 - `clipdeck daemon` polls the Wayland clipboard and stores text history.
 - `clipdeck` opens a GTK picker window. Type to filter, use arrow keys, press Enter to copy the selected item back to the clipboard.
 
+## Todo's
+- Get rid of the GTK4 Dependencies and make a custom **customizable** Ui.
+
 ## Requirements
 
 - Rust
